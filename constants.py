@@ -4,8 +4,8 @@ EMPTY_SPACE = ""
 ALADIN_URL = "https://www.aladin.co.kr/search/wsearchresult.aspx?SearchTarget=UsedStore&KeyTag=&SearchWord=%{}"
 USER_AGENT = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/48.0.2564.82 Safari/537.36"
 
-BOOK_RESULT_TXT = "검색된 책은 총 {} 권 입니다.\n"
-INFO_MESSAGE = "이 결과는 알라딘 중고매장에서 검색된 결과 입니다.\n"
+BOOK_RESULT_TXT = "검색된 책은 총 {} 권 입니다.\n\n"
+INFO_MESSAGE = "이 결과는 알라딘 중고매장에서 검색된 결과 입니다.\n\n"
 
 BOOK_RESULT_HTML = """<div id="Search3_Result" style="padding: 10px 0px 0px 0px;">
     <div class="ss_book_box" itemid="30622556">
