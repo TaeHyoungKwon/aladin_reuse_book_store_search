@@ -5,11 +5,14 @@ import requests
 from bs4 import BeautifulSoup
 
 from constants import ALADIN_URL, USER_AGENT, BOOK_RESULT_TXT, EMPTY_SPACE, NEW_LINE, INFO_MESSAGE
-from utils import encode_euc_kr
+from utils import encode_euc_kr, is_korean
 
 
 def request_get(url, search_word):
-    return requests.get(url.format(encode_euc_kr(search_word)), headers={"USER-AGENT": USER_AGENT})
+    if is_korean(search_word):
+        search_word = encode_euc_kr(search_word)
+
+    return requests.get(url.format(search_word), headers={"USER-AGENT": USER_AGENT})
 
 
 def convert_text_to_soup(response):
