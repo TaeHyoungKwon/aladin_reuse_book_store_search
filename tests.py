@@ -4,8 +4,9 @@ from unittest.mock import patch, Mock
 
 from bs4 import BeautifulSoup
 
-from constants import ALADIN_URL, BOOK_RESULT_HTML, BOOK_RESULT_TXT
+from constants import ALADIN_URL, BOOK_RESULT_HTML, BOOK_RESULT_TXT, INFO_MESSAGE
 from crawling_aladin import crawl_aladin
+from utils import is_korean, encode_euc_kr
 
 
 class TestAladinCrawling(unittest.TestCase):
@@ -39,6 +40,22 @@ class TestAladinCrawling(unittest.TestCase):
         self.assertEqual(response["status"], 200)
         self.assertEqual(response["message"], "OK")
 
-        self.assertEqual(response["result"], (BOOK_RESULT_TXT.format(str(2))
+        self.assertEqual(response["result"], (INFO_MESSAGE
+                                              + BOOK_RESULT_TXT.format(str(2))
                                               + "1. 할랄, 신이 허락한 음식만 먹는다 (반양장)\n"
                                               + "2. 문화코드, 어떻게 읽을 것인가 (반양장)"))
+
+    def test_is_korean_should_return_true_when_given_text_is_korean(self):
+        text = '한글123'
+        actual = is_korean(text)
+        self.assertEqual(actual, True)
+
+    def test_is_korean_should_return_false_when_given_text_is_not_korean(self):
+        text = 'python123'
+        actual = is_korean(text)
+        self.assertEqual(actual, False)
+
+    def test_encode_euc_kr_on_korean(self):
+        search_word = '파이썬'
+        actual = encode_euc_kr(search_word)
+        self.assertEqual(actual, 'C6%C4%C0%CC%BD%E3')
